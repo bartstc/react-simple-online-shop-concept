@@ -1,0 +1,58 @@
+@import '../../../index.scss';
+
+.order-summary {
+  max-width: 360px;
+  margin: 0 auto;
+
+  @include mediaMd {
+    max-width: 400px;
+    margin-right: 1.6em;
+  }
+
+  .title {
+    font-size: 1.15em;
+    margin-top: .8em;
+  
+    @include mediaMd {
+      font-size: 1.3em;
+    }
+  }
+
+  .info {
+    font-size: .8em;
+  }
+
+  .delivery-info {
+    margin-bottom: 1.4em;
+  }
+
+  .promo-info {
+    margin-top: 1.4em;
+  }
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: .2em;
+  
+    .subtitle {
+      font-size: 1em;
+    }
+
+    .value {
+      font-size: 1em;
+      font-weight: $fw-medium;
+    }
+
+    input {
+      border: none;
+      border-bottom: 1px solid #000;
+      outline: none;
+
+      &::placeholder {
+        color: #000;
+      }
+    }
+  }
+}

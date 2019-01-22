@@ -1,0 +1,34 @@
+@import '../../../index.scss';
+
+.questions-form {
+  display: flex;
+  flex-direction: column;
+  padding: 1.2em 1em;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+
+  input,
+  textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    margin-bottom: .6em;
+    color: #fff;
+
+    &::placeholder {
+      color: #fff;
+    }
+  }
+
+  button {
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+
+    @include mediaSm {
+      width: 140px;
+      align-self: flex-end;
+    }
+  }
+}

@@ -1,0 +1,47 @@
+@import '../../index.scss';
+
+.product-container {
+  padding: 0 .5em;
+}
+
+.filter-panel {
+  font-weight: $fw-medium;
+  margin-bottom: .8em;
+
+  select {
+    height: 26px;
+    font-size: .95em;
+    margin-left: 8px;
+    outline: none;
+  }
+
+  .products-amount {
+    font-weight: $fw-medium;
+    margin: .3em 0;
+  }
+}
+
+.product-list-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @include mediaMd {
+    grid-template-columns: 17% 83%;
+  }
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: .5em;
+  grid-row-gap: 1em;
+
+  @include mediaMd {
+    grid-column-gap: 1em;
+    grid-row-gap: 2em;
+  }
+
+  @include mediaLg {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

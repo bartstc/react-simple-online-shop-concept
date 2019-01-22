@@ -1,0 +1,33 @@
+@import '../../../index.scss';
+
+.social-media {
+  width: 100%;
+  text-align: center;
+  padding: .4em 0;
+
+  .title {
+    margin: .4em 0;
+  }
+
+  .icons-wrapper {
+    width: 60%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    a img {
+      width: 34px;
+    }
+  }
+}
+
+.title {
+  font-weight: $fw-semibold;
+  font-size: 1.4em;
+
+  @include mediaMd {
+    font-size: 1.6em;
+  }
+}

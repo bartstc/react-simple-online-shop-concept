@@ -1,0 +1,42 @@
+@import '../../../index.scss';
+
+.cart-item {
+  display: flex;
+  margin-bottom: 1.2em;
+  
+  .img-wrapper {
+    flex: 1;
+    padding-top: .4em;
+  }
+
+  .cart-item-content {
+    flex: 1.2;
+    padding-left: .4em;
+
+    .name {
+      font-size: .9em;
+      font-weight: $fw-medium;
+
+      @include mediaMd {
+        font-size: 1.1em;
+      }
+    }
+
+    .value {
+      font-size: .9em;
+
+      @include mediaMd {
+        font-size: 1em;
+      }
+    }
+
+    .size-btn {
+      width: 25px;
+      height: 25px;
+      margin-right: .5em;
+      background: none;
+      border: 1px solid #000;
+      line-height: 1.8em;
+    }
+  }
+}

@@ -1,0 +1,162 @@
+@import '../../index.scss';
+
+.header {
+  position: fixed;
+  z-index: 10;
+  background-color: #000;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 15px;
+
+  .left-wrapper {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.toggle-side-drawer {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  @include mediaMd {
+    display: none;
+  }
+
+  img {
+    width: 36px;
+  }
+}
+
+.logo {
+  width: 110px;
+  display: none;
+
+  @include mediaMd {
+    display: block;
+  }
+}
+
+.navigation {
+  display: none;
+
+  @include mediaMd {
+    display: block;
+  }
+
+  .nav-list {
+    display: flex;
+    padding-left: 10px;
+    color: #fff;
+
+    .nav-link {
+      color: #fff;
+      margin: 0 14px;
+      cursor: pointer;
+      border-bottom: 1px solid transparent;
+      transition: all .2s ease-in-out;
+
+      &:hover {
+        border-bottom: 1px solid #fff;
+      }
+    }
+  }
+}
+
+.navigation-icons {
+  &-list {
+    display: flex;
+    position: relative;
+
+    .nav-link {
+      color: #fff;
+      cursor: pointer;
+
+      .icon {
+        width: 34px;
+      }
+    }
+
+    .products-amount {
+      position: absolute;
+      z-index: -1;
+      color: #fff;
+      font-size: .6em;
+      top: 62%;
+      left: 83%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+// === SIDE DRAWER ===
+.side-drawer {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 30;
+  height: 100%;
+  width: 74%;
+  max-width: 240px;
+  background: #fff;
+  transition: all .2s ease-in-out;
+
+  @include mediaMd {
+    display: none;
+  }
+
+  .logo-wrapper {
+    background: #000;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+
+  .logo {
+    display: block;
+  }
+}
+
+.side-navigation-wrapper {
+  padding-left: 15px;
+}
+
+.side-navigation {
+  display: block;
+
+  &-list {
+    .nav-link {
+      cursor: pointer;
+      border-bottom: 1px solid transparent;
+      transition: all .2s ease-in-out;
+      color: #000;
+
+      &.main {
+        line-height: 35px;
+        font-size: 1.2em;
+        font-weight: $fw-medium;
+      }
+
+      &:hover {
+        border-bottom: 1px solid #000;
+      }
+    }
+  }
+}
+
+.open {
+  transform: translateX(0);
+}
+
+.close {
+  transform: translateX(-100%);
+}

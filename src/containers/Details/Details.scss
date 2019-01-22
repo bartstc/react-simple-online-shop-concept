@@ -1,0 +1,48 @@
+@import '../../index.scss';
+
+.details-container {
+  padding: 0 .5em;
+
+  .detail-subtitle {
+    font-weight: $fw-medium;
+    font-size: 1.1em;
+
+    &:not(:nth-child(1)) {
+      margin-top: .4em;
+    }
+  }
+
+  .switch-field {
+    margin: .4em 0;
+  }
+  
+  .switch-field input {
+    position: absolute;
+    height: 1px;
+    width: 1px;
+    border: 0;
+    overflow: hidden;
+  }
+
+  .switch-field label {
+    display: inline-block;
+    width: 40px;
+    font-size: 14px;
+    text-align: center;
+    padding: 8px;
+    margin-right: .7em;
+    border: 1px solid #000;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+  }
+
+  .switch-field input:checked + label {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .button-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,30 @@
+@import '../../index.scss';
+
+.cart-container {
+  padding: 0 .5em;
+
+  .content-wrapper {
+    @include mediaMd {
+      display: grid;
+      grid-template-columns: 60% 40%;
+      grid-gap: 1em;
+    }
+  }
+}
+
+.cart-list {
+  max-width: 360px;
+  margin: 0 auto;
+  margin-top: 1em;
+
+  @include mediaMd {
+    max-width: 500px;
+    margin: auto 0;
+    margin-top: 1em;
+  }
+}
+
+.bold {
+  font-weight: $fw-semibold;
+}
+
