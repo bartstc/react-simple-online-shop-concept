@@ -8,11 +8,11 @@ const navigationItems = props => (
   <ul className="nav-list">
     <NavigationItem
       clicked={() => props.filterProducts('female')}
-      link="/productlist/women"
+      link="/productlist/female"
       exact>Women</NavigationItem>
     <NavigationItem
       clicked={() => props.filterProducts('male')}
-      link="/productlist/men"
+      link="/productlist/male"
       exact>Men</NavigationItem>
     <NavigationItem link="/contact" exact>Contact</NavigationItem>
     <NavigationItem link="/" exact>Home</NavigationItem>

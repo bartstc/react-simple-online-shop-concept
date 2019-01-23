@@ -9,7 +9,7 @@
   outline: none;
   cursor: pointer;
   max-width: 180px;
-  transition: background .3s ease-in-out;
+  transition: all .3s ease-in-out;
 
   &:hover {
     background: #000;
@@ -32,5 +32,17 @@
   &.dark {
     background: #000;
     color: #fff;
+  }
+}
+
+button:disabled {
+  color: #666;
+  border: 1px solid #666;
+  cursor: no-drop;
+
+  &:hover {
+    color: #666;
+    background: #fff;
+    border: 1px solid #666;
   }
 }

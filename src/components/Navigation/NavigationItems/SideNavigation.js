@@ -27,16 +27,13 @@ const sideNavigation = (props) => (
       {/* <NavigationItem
         clicked={() => props.filterProducts('female')}
         style={{ lineHeight: '35px', fontSize: '1.2em', fontWeight: '500' }}
-        link="/productlist/women"
+        link="/productlist/female"
         exact>Women</NavigationItem> */}
 
       {femaleCategories.map(category => (
         <NavigationItem
           key={category.category}
-          clicked={() => {
-            props.filterProducts(category.category);
-            props.resetCheckbox();
-          }}
+          clicked={() => props.filterProducts(category.category)}
           linkType={category.linkType}
           link={`/productlist/${category.category}`}>
           {category.content}

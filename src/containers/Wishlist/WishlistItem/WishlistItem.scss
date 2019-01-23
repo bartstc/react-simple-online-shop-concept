@@ -1,0 +1,51 @@
+@import '../../../index.scss';
+
+.wishlist-item {
+  margin-top: 1.3em;
+
+  .wishlist-title {
+    font-weight: $fw-medium;
+
+    @include mediaMd {
+      font-size: 1.35em;
+    }
+  }
+
+  .wishlist-content {
+    margin-top: .4em;
+
+    @include mediaMd {
+      display: flex;
+    }
+
+    .wishlist-img-wrapper {
+      flex: 1;
+      padding-top: .4em;
+    }
+
+    .wishlist-info {
+      flex: 1;
+
+      @include mediaMd {
+        padding-left: .8em;
+      }
+    }
+  }
+
+  .wishlist-subtitle {
+    font-weight: $fw-medium;
+    font-size: 1.1em;
+
+    &:not(:nth-child(1)) {
+      margin-top: .4em;
+    }
+  }
+
+  .wishlist-value {
+    font-size: .9em;
+
+    @include mediaMd {
+      font-size: 1em;
+    }
+  }
+}

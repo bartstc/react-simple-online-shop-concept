@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions';
 
 import { NavLink } from 'react-router-dom';
 
-const navigationItem = (props) => (
-  <li onClick={props.handleLinkClick}>
-    <NavLink
-      onClick={props.clicked}
-      style={props.style}
-      className={["nav-link", props.linkType].join(' ')}
-      to={props.link}
-      exact={props.exact}>
-      {props.children}
-    </NavLink>
-  </li>
-);
+class NavigationItem extends Component {
+  render() {
+    return (
+      <li
+        style={{ alignSelf: 'flex-start' }}
+        className="nav-link-wrapper"
+        onClick={this.props.handleLinkClick}>
+        <NavLink
+          onClick={this.props.clicked}
+          style={this.props.style}
+          className={["nav-link", this.props.linkType].join(' ')}
+          to={this.props.link}
+          exact={this.props.exact}>
+          {this.props.children}
+        </NavLink>
+      </li>
+    )
+  }
+
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -23,4 +31,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(navigationItem);
+export default connect(null, mapDispatchToProps)(NavigationItem);

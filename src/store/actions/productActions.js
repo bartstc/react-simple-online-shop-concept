@@ -7,6 +7,21 @@ export const filterProducts = category => {
   }
 };
 
+export const addToCart = (id, size) => {
+  return {
+    type: actionTypes.ADD_TO_CART,
+    id,
+    size
+  }
+};
+
+export const addToWishlist = id => {
+  return {
+    type: actionTypes.ADD_TO_WISHLIST,
+    id
+  }
+};
+
 export const sortProducts = (priceKey, idKey) => {
   return {
     type: actionTypes.SORT_PRODUCTS,
@@ -15,9 +30,22 @@ export const sortProducts = (priceKey, idKey) => {
   }
 };
 
-export const handleDirection = direction => {
+export const handleDirection = () => {
   return {
-    type: actionTypes.HANDLE_DIRECTION,
-    direction
+    type: actionTypes.HANDLE_DIRECTION
+  }
+};
+
+export const handleCheckboxValue = value => {
+  return {
+    type: actionTypes.HANDLE_CHECKBOX_VALUE,
+    value
+  }
+}
+
+export const showDetails = id => {
+  return {
+    type: actionTypes.SHOW_DETAILS,
+    id
   }
 };

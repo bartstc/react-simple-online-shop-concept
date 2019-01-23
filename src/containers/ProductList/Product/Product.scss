@@ -3,13 +3,13 @@
 .product {
 
   .info {
-    font-size: .8em;
-    margin-top: 5px;
+    font-size: .75em;
     font-weight: $fw-medium;
+    margin-top: 5px;
     line-height: 1.1em;
 
     @include mediaSm {
-      font-size: 1.1em;
+      font-size: .95em;
     }
   }
 

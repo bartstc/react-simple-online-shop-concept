@@ -29,11 +29,11 @@ const sideDrawer = (props) => {
         <div className="side-navigation-wrapper">
           <SideNavigation>
             <NavigationItem
-              style={{ lineHeight: '35px', fontSize: '1.2em', fontWeight: '500' }}
+              linkType={'main'}
               link="/contact"
               exact>Contact</NavigationItem>
             <NavigationItem
-              style={{ lineHeight: '35px', fontSize: '1.2em', fontWeight: '500' }}
+              linkType={'main'}
               link="/"
               exact>Home</NavigationItem>
           </SideNavigation>

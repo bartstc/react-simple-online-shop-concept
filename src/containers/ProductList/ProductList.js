@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './ProductList.scss';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
 
@@ -18,21 +18,23 @@ class ProductList extends Component {
   };
 
   handleChange = (e) => {
-    this.setState({
-      checkboxValue: e.target.value
-    }, () => {
-      this.props.handleDirection(this.state.checkboxValue);
-      this.props.sortProducts('price', 'id');
-    });
+    this.props.handleCheckboxValue(e.target.value);
+    this.props.handleDirection();
+    this.props.sortProducts('price', 'id');
   };
+
+  showDetailsByModal = id => {
+    this.props.showDetails(id);
+    this.props.closeModal();
+  }
 
   render() {
     const { products } = this.props;
-    if (products.length === 0) {
+    if (!products || products.length === 0) {
       return <Redirect to="/" />
     };
 
-    const { title, img, subtitle, price } = this.props.modalProduct;
+    const { title, img, subtitle, price, id } = this.props.modalProduct;
 
     return (
       <div className="product-container">
@@ -48,13 +50,14 @@ class ProductList extends Component {
           <h3 className="modal-title">Price: {price}.00 $</h3>
           <h3 className="modal-title">Sizes: S, M, L, XL, XXL</h3>
           <div className="btn-wrapper">
-            <Button>Add to Wishlist</Button>
-            <Button>Show Details</Button>
+            <Link to={`/details/${id}`}>
+              <Button clicked={() => this.showDetailsByModal(id)}>Show Details</Button>
+            </Link>
           </div>
         </Modal>
         <div className="filter-panel">
           Sort by:
-          <select onChange={this.handleChange} value={this.state.checkboxValue}>
+          <select onChange={this.handleChange} value={this.props.checkboxValue}>
             <option value="relevance">Relevance</option>
             <option value="price - low to high">Price - low to high</option>
             <option value="price - high to low">Price - high to low</option>
@@ -63,15 +66,16 @@ class ProductList extends Component {
         </div>
         <div className="product-list-wrapper">
           <div className="navigation">
-            <SideNavigation resetCheckbox={() => {
-              this.setState({
-                checkboxValue: 'relevance'
-              })
-            }} />
+            <SideNavigation />
           </div>
           <ul className="product-list">
             {products.map(product => (
-              <Product key={product.id} product={product} showModal={this.props.openModal} />
+              <Product
+                key={product.id}
+                product={product}
+                showModal={this.props.openModal}
+                showDetails={this.props.showDetails}
+              />
             ))}
           </ul>
         </div>
@@ -84,16 +88,19 @@ const mapStateToProps = state => {
   return {
     products: state.products.products,
     modalShowed: state.interface.modalShowed,
-    modalProduct: state.interface.modalProduct
+    modalProduct: state.interface.modalProduct,
+    checkboxValue: state.products.sortCheckboxValue
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    openModal: (id) => dispatch(actions.openModal(id)),
+    openModal: id => dispatch(actions.openModal(id)),
     closeModal: () => dispatch(actions.closeModal()),
     sortProducts: (priceKey, idKey) => dispatch(actions.sortProducts(priceKey, idKey)),
-    handleDirection: (direction) => dispatch(actions.handleDirection(direction))
+    handleDirection: () => dispatch(actions.handleDirection()),
+    handleCheckboxValue: value => dispatch(actions.handleCheckboxValue(value)),
+    showDetails: id => dispatch(actions.showDetails(id))
   }
 };
 

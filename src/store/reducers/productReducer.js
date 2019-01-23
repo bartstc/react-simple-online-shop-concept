@@ -4,10 +4,16 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   productList,
   products: [],
+  cart: [],
+  wishlist: [],
   direction: {
     price: 'relevance'
-  }
+  },
+  sortCheckboxValue: 'relevance',
+  detailProduct: null
 };
+
+const getItem = id => productList.find(item => item.id === id);
 
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -17,13 +23,44 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         products: tempProducts,
-        direction: { price: 'relevance' }
+        direction: { price: 'relevance' },
+        sortCheckboxValue: 'relevance'
       }
 
-    case actionTypes.HANDLE_DIRECTION:
+    case actionTypes.ADD_TO_CART:
+      const cUpdatedList = [...state.productList];
+      const cartItemIndex = cUpdatedList.indexOf(getItem(action.id));
+      const cartItem = cUpdatedList[cartItemIndex];
+
+      cartItem.inCart = true;
+      cartItem.amount = 1;
+      cartItem.size = action.size;
+      const price = cartItem.price;
+      cartItem.total = price;
+
+      const cUpdatedDetailProduct = { ...state.detailProduct };
+      cUpdatedDetailProduct.inCart = true;
       return {
         ...state,
-        direction: { price: action.direction }
+        productList: cUpdatedList,
+        cart: [...state.cart, cartItem],
+        detailProduct: cUpdatedDetailProduct
+      }
+
+    case actionTypes.ADD_TO_WISHLIST:
+      const wUpdatedList = [...state.productList];
+      const wishlistItemIndex = wUpdatedList.indexOf(getItem(action.id));
+      const wishlistItem = wUpdatedList[wishlistItemIndex];
+
+      wishlistItem.inWishlist = true;
+
+      const wUpdatedDetailProduct = { ...state.detailProduct };
+      wUpdatedDetailProduct.inWishlist = true;
+      return {
+        ...state,
+        productList: wUpdatedList,
+        wishlist: [...state.wishlist, wishlistItem],
+        detailProduct: wUpdatedDetailProduct
       }
 
     case actionTypes.SORT_PRODUCTS:
@@ -43,6 +80,25 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         products: sortedProducts
+      }
+
+    case actionTypes.HANDLE_DIRECTION:
+      return {
+        ...state,
+        direction: { price: state.sortCheckboxValue }
+      }
+
+    case actionTypes.HANDLE_CHECKBOX_VALUE:
+      return {
+        ...state,
+        sortCheckboxValue: action.value
+      }
+
+    case actionTypes.SHOW_DETAILS:
+      const detailProduct = getItem(action.id);
+      return {
+        ...state,
+        detailProduct
       }
 
     default:

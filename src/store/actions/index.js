@@ -1,7 +1,11 @@
 export {
   filterProducts,
+  addToCart,
+  addToWishlist,
   sortProducts,
-  handleDirection
+  handleDirection,
+  handleCheckboxValue,
+  showDetails
 } from './productActions';
 
 export {
