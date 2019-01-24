@@ -30,15 +30,19 @@ const sideNavigation = (props) => (
         link="/productlist/female"
         exact>Women</NavigationItem> */}
 
-      {femaleCategories.map(category => (
-        <NavigationItem
-          key={category.category}
-          clicked={() => props.filterProducts(category.category)}
-          linkType={category.linkType}
-          link={`/productlist/${category.category}`}>
-          {category.content}
-        </NavigationItem>
-      ))}
+      {femaleCategories.map(femaleCategory => {
+        const { category, linkType, content } = femaleCategory;
+
+        return (
+          <NavigationItem
+            key={category}
+            clicked={() => props.filterProducts(category)}
+            linkType={linkType}
+            link={`/productlist/${category}`}>
+            {content}
+          </NavigationItem>
+        )
+      })}
 
       <NavigationItem link="/productlist/women" exact>Suits</NavigationItem>
       <NavigationItem link="/productlist/women" exact>Shirts</NavigationItem>

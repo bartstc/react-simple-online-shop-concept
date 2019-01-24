@@ -10,7 +10,10 @@ const initialState = {
     price: 'relevance'
   },
   sortCheckboxValue: 'relevance',
-  detailProduct: null
+  detailProduct: null,
+  priceTotal: 0,
+  delivery: 0,
+  orderTotal: 0
 };
 
 const getItem = id => productList.find(item => item.id === id);
@@ -99,6 +102,102 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         detailProduct
+      }
+
+    case actionTypes.CALCULATE_ORDER:
+      let priceTotal = 0;
+      state.cart.map(item => (priceTotal += item.total));
+
+      let productAmount = 0;
+      state.cart.map(item => (productAmount += item.amount));
+      let delivery = 0;
+      if (productAmount > 3) delivery = productAmount * 10;
+
+      let orderTotal = priceTotal + delivery;
+      return {
+        ...state,
+        priceTotal,
+        delivery,
+        orderTotal
+      }
+
+    case actionTypes.REMOVE_CART_ITEM:
+      let rcUpdatedProducts = [...state.productList];
+      let rcTempCart = [...state.cart];
+      rcTempCart = rcTempCart.filter(item => item.id !== action.id);
+
+      const rcIndex = rcUpdatedProducts.indexOf(getItem(action.id));
+      let removedCartItem = rcUpdatedProducts[rcIndex];
+      removedCartItem.inCart = false;
+      removedCartItem.amount = 0;
+      removedCartItem.total = 0;
+      removedCartItem.size = null;
+
+      return {
+        ...state,
+        cart: [...rcTempCart],
+        productList: [...rcUpdatedProducts]
+      }
+
+    case actionTypes.HANDLE_PRODUCT_AMOUNT:
+      let iTempCart = [...state.cart];
+      const iSelectedProduct = iTempCart.find(item => item.id === action.id);
+
+      const iIndex = iTempCart.indexOf(iSelectedProduct);
+      const incrementedProduct = iTempCart[iIndex];
+
+      if (action.value === 'increment') {
+        incrementedProduct.amount = incrementedProduct.amount + 1;
+      } else if (action.value === 'decrement') {
+        incrementedProduct.amount = incrementedProduct.amount - 1;
+      }
+      incrementedProduct.total = incrementedProduct.amount * incrementedProduct.price;
+
+      return {
+        ...state,
+        cart: [...iTempCart]
+      }
+
+    case actionTypes.CLEAR_CART:
+      const cNewProductList = [...state.productList];
+      cNewProductList.forEach(product => {
+        product.total = 0;
+        product.size = null;
+        product.amount = 0;
+        product.inCart = false;
+      });
+
+      return {
+        ...state,
+        productList: cNewProductList,
+        cart: []
+      }
+
+    case actionTypes.REMOVE_WISHLIST_ITEM:
+      let rwUpdatedProducts = [...state.productList];
+      let tempWishlist = [...state.wishlist];
+      tempWishlist = tempWishlist.filter(item => item.id !== action.id);
+
+      const rwIndex = rwUpdatedProducts.indexOf(getItem(action.id));
+      let removedWishlistItem = rwUpdatedProducts[rwIndex];
+      removedWishlistItem.inWishlist = false;
+
+      return {
+        ...state,
+        wishlist: [...tempWishlist],
+        productList: [...rwUpdatedProducts]
+      }
+
+    case actionTypes.CLEAR_WISHLIST:
+      const wNewProductList = [...state.productList];
+      wNewProductList.forEach(product => {
+        product.inWishlist = false;
+      });
+
+      return {
+        ...state,
+        productList: wNewProductList,
+        wishlist: []
       }
 
     default:

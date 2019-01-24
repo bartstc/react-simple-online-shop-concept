@@ -26,17 +26,20 @@ class Details extends Component {
   };
 
   render() {
-    if (!this.props.detailProduct) return <Redirect to="/" />
+    const { detailProduct, modalShowed, closeModal, addToWishlist } = this.props;
+    const { value } = this.state;
+
+    if (!detailProduct) return <Redirect to="/" />
 
     return (
       <Fragment>
         <Modal
           modalType="small"
-          showModal={this.props.modalShowed}
-          showBackdrop={this.props.modalShowed}
-          closeModal={this.props.closeModal}>
+          showModal={modalShowed}
+          showBackdrop={modalShowed}
+          closeModal={closeModal}>
           <p>You must select size.</p>
-          <Button clicked={this.props.closeModal} btnType="dark">Got it</Button>
+          <Button clicked={closeModal} btnType="dark">Got it</Button>
         </Modal>
         <ul className="details-container">
           <DetailItem>
@@ -47,7 +50,7 @@ class Details extends Component {
                 id="switch_s"
                 name="switch_5"
                 value="S"
-                checked={this.state.value === 'S'}
+                checked={value === 'S'}
                 onChange={this.handleChange}
               />
               <label htmlFor="switch_s">S</label>
@@ -56,7 +59,7 @@ class Details extends Component {
                 id="switch_m"
                 name="switch_5"
                 value="M"
-                checked={this.state.value === 'M'}
+                checked={value === 'M'}
                 onChange={this.handleChange}
               />
               <label htmlFor="switch_m">M</label>
@@ -65,7 +68,7 @@ class Details extends Component {
                 id="switch_l"
                 name="switch_5"
                 value="L"
-                checked={this.state.value === 'L'}
+                checked={value === 'L'}
                 onChange={this.handleChange}
               />
               <label htmlFor="switch_l">L</label>
@@ -74,7 +77,7 @@ class Details extends Component {
                 id="switch_xl"
                 name="switch_5"
                 value="XL"
-                checked={this.state.value === 'XL'}
+                checked={value === 'XL'}
                 onChange={this.handleChange}
               />
               <label htmlFor="switch_xl">XL</label>
@@ -83,7 +86,7 @@ class Details extends Component {
                 id="switch_xxl"
                 name="switch_5"
                 value="XXL"
-                checked={this.state.value === 'XXL'}
+                checked={value === 'XXL'}
                 onChange={this.handleChange}
               />
               <label htmlFor="switch_xxl">XXL</label>
@@ -91,15 +94,19 @@ class Details extends Component {
             <div className="button-wrapper">
               <Button
                 clicked={this.handleAddToCart}
-                disabled={this.props.detailProduct.inCart ? true : false}>
-                {this.props.detailProduct.inCart ?
+                disabled={detailProduct.inCart ? true : false}>
+                {detailProduct.inCart ?
                   (<p>In Cart</p>) :
                   (<p>Add to Cart</p>)
                 }
               </Button>
               <Button
-                clicked={() => this.props.addToWishlist(this.props.detailProduct.id)}
-                disabled={this.props.detailProduct.inWishlist ? true : false}>Add to Wishlist
+                clicked={() => addToWishlist(detailProduct.id)}
+                disabled={detailProduct.inWishlist ? true : false}>
+                {detailProduct.inWishlist ?
+                  (<p>In WIshlist</p>) :
+                  (<p>Add to Wishlist</p>)
+                }
               </Button>
             </div>
           </DetailItem>

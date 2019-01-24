@@ -10,16 +10,18 @@ class Modal extends Component {
   // };
 
   render() {
+    const { showBackdrop, closeModal, modalType, showModal, children } = this.props;
+
     return (
       <Fragment>
-        <Backdrop show={this.props.showBackdrop} clicked={this.props.closeModal} />
+        <Backdrop show={showBackdrop} clicked={closeModal} />
         <div
-          className={["modal", this.props.modalType].join(' ')}
+          className={["modal", modalType].join(' ')}
           style={{
-            transform: this.props.showModal ? 'translateY(0)' : 'translateY(-100vh)',
-            opacity: this.props.showModal ? '1' : '0'
+            transform: showModal ? 'translateY(0)' : 'translateY(-100vh)',
+            opacity: showModal ? '1' : '0'
           }}>
-          {this.props.children}
+          {children}
         </div>
       </Fragment>
     )

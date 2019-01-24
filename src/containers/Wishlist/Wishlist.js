@@ -1,8 +1,10 @@
 import React from 'react';
 import './Wishlist.scss';
 import { connect } from 'react-redux';
+import * as actions from '../../store/actions';
 
 import WishlistItem from './WishlistItem/WishlistItem';
+import Button from '../../components/UI/Button/Button';
 
 const wishlist = (props) => {
   let list;
@@ -10,7 +12,7 @@ const wishlist = (props) => {
     list = (
       <ul className="wishlist-list">
         {props.wishlistItems.map(item => (
-          <WishlistItem item={item} />
+          <WishlistItem key={item.id} item={item} />
         ))}
       </ul>
     );
@@ -20,6 +22,9 @@ const wishlist = (props) => {
       <h2 className="main-title">Wishlist</h2>
       <p className="main-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eleifend ligula neque, at faucibus metus trum sedru.</p>
       {list}
+      {props.wishlistItems.length > 0 &&
+        <Button clicked={props.clearWishlist} btnType="dark">Clear Wishlist</Button>
+      }
     </div>
   )
 };
@@ -30,4 +35,10 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps)(wishlist);
+const mapDispatchToProps = dispatch => {
+  return {
+    clearWishlist: () => dispatch(actions.clearWishlist())
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(wishlist);

@@ -25,7 +25,7 @@ const wishlistItem = (props) => {
             <Link to={`/details/${id}`}>
               <Button clicked={() => props.showDetails(id)}>Show Details</Button>
             </Link>
-            <Button btnType="dark">Remove</Button>
+            <Button clicked={() => props.removeWishlistItem(id)} btnType="dark">Remove</Button>
           </div>
         </div>
       </div>
@@ -35,7 +35,8 @@ const wishlistItem = (props) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    showDetails: id => dispatch(actions.showDetails(id))
+    showDetails: id => dispatch(actions.showDetails(id)),
+    removeWishlistItem: id => dispatch(actions.removeWishlistItem(id))
   }
 };
 

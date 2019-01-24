@@ -29,7 +29,8 @@ class ProductList extends Component {
   }
 
   render() {
-    const { products } = this.props;
+    const { products, modalShowed, closeModal, openModal, showDetails, checkboxValue } = this.props;
+
     if (!products || products.length === 0) {
       return <Redirect to="/" />
     };
@@ -39,10 +40,10 @@ class ProductList extends Component {
     return (
       <div className="product-container">
         <Modal
-          showModal={this.props.modalShowed}
-          showBackdrop={this.props.modalShowed}
-          closeModal={this.props.closeModal}>
-          <button onClick={this.props.closeModal} className="close-modal-btn">x</button>
+          showModal={modalShowed}
+          showBackdrop={modalShowed}
+          closeModal={closeModal}>
+          <button onClick={closeModal} className="close-modal-btn">x</button>
           <h3 className="main-title">{title}</h3>
           <img src={img} alt="" />
           <h3 className="modal-title">Info:</h3>
@@ -57,7 +58,7 @@ class ProductList extends Component {
         </Modal>
         <div className="filter-panel">
           Sort by:
-          <select onChange={this.handleChange} value={this.props.checkboxValue}>
+          <select onChange={this.handleChange} value={checkboxValue}>
             <option value="relevance">Relevance</option>
             <option value="price - low to high">Price - low to high</option>
             <option value="price - high to low">Price - high to low</option>
@@ -73,8 +74,8 @@ class ProductList extends Component {
               <Product
                 key={product.id}
                 product={product}
-                showModal={this.props.openModal}
-                showDetails={this.props.showDetails}
+                showModal={openModal}
+                showDetails={showDetails}
               />
             ))}
           </ul>

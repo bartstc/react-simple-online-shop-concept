@@ -5,7 +5,13 @@ export {
   sortProducts,
   handleDirection,
   handleCheckboxValue,
-  showDetails
+  showDetails,
+  calculateOrder,
+  removeCartItem,
+  handleProductAmount,
+  clearCart,
+  removeWishlistItem,
+  clearWishlist
 } from './productActions';
 
 export {

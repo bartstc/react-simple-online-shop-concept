@@ -31,6 +31,6 @@ const mapStateToProps = state => {
   return {
     detailProduct: state.products.detailProduct
   }
-}
+};
 
 export default connect(mapStateToProps)(detailItem);
