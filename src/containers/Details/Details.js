@@ -21,7 +21,7 @@ class Details extends Component {
 
   handleAddToCart = () => {
     (this.state.value === '') ?
-      this.props.openModal(this.props.detailProduct.id) :
+      this.props.openModal() :
       this.props.addToCart(this.props.detailProduct.id, this.state.value);
   };
 

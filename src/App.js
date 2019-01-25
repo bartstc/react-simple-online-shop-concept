@@ -27,6 +27,7 @@ class App extends Component {
             <Route path="/wishlist" component={Wishlist} />
             <Route path="/wishlist" component={Wishlist} />
             <Route path="/" exact component={HomePage} />
+            {/* add default component (page not found) */}
           </Switch>
         </Layout>
       </Fragment>

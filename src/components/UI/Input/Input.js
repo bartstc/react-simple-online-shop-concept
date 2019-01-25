@@ -5,10 +5,10 @@ const input = (props) => {
   const { invalid, shouldValidate, touched, elementType, elementConfig, value, changed, label } = props;
 
   let inputElement = null;
-  const inputClasses = ["InputElement"];
+  const inputClasses = ["input"];
 
   if (invalid && shouldValidate && touched) {
-    inputClasses.push("Invalid");
+    inputClasses.push("invalid");
   };
 
   switch (elementType) {

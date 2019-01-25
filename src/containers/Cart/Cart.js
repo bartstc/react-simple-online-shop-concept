@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Cart.scss';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
+import { Redirect } from 'react-router-dom';
 
 import Button from '../../components/UI/Button/Button';
 import OrderSummary from './OrderSummary/OrderSummary';
@@ -72,6 +73,8 @@ class Cart extends Component {
         {cartItems.length > 0 &&
           <Button clicked={this.props.clearCart} btnType="dark">Clear Cart</Button>
         }
+
+        {this.props.purchased && <Redirect to="/" />}
       </div>
     );
   }
@@ -79,7 +82,8 @@ class Cart extends Component {
 
 const mapStateToProps = state => {
   return {
-    cartItems: state.products.cart
+    cartItems: state.products.cart,
+    purchased: state.order.purchased
   }
 };
 
@@ -87,8 +91,7 @@ const mapDispatchToProps = dispatch => {
   return {
     remove: id => dispatch(actions.removeCartItem(id)),
     handleProductAmount: (id, value) => dispatch(actions.handleProductAmount(id, value)),
-    calculateOrder: () => dispatch(actions.calculateOrder()),
-    clearCart: () => dispatch(actions.clearCart())
+    calculateOrder: () => dispatch(actions.calculateOrder())
   }
 };
 

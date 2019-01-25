@@ -6,7 +6,7 @@ import userIcon from '../../../assets/icons/user.png';
 import heartIcon from '../../../assets/icons/heart_white.png';
 import cartIcon from '../../../assets/icons/cart_white.png';
 
-const navigationItemsIcons = (props) => (
+const navigationItemsIcons = props => (
   <ul className="navigation-icons-list">
     <p className="products-amount">{props.cartItems.length}</p>
     <NavigationItem link="/auth" exact>
@@ -25,6 +25,6 @@ const mapStateToProps = state => {
   return {
     cartItems: state.products.cart
   }
-}
+};
 
 export default connect(mapStateToProps)(navigationItemsIcons);

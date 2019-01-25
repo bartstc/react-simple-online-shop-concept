@@ -6,7 +6,7 @@ export const handleLinkClick = () => {
   }
 };
 
-export const openModal = (id) => {
+export const openModal = (id = 101) => {
   return {
     type: actionTypes.OPEN_MODAL,
     id
