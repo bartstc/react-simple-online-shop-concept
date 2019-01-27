@@ -2,18 +2,27 @@ import React, { Component, Fragment } from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from './store/actions';
+import asyncComponent from './hoc/asyncComponent';
 
 // COMPONENTS
 import Layout from './layout/Layout';
-import Auth from './containers/Auth/Auth';
+// import Auth from './containers/Auth/Auth';
+// import Orders from './containers/Orders/Orders';
 import Cart from './containers/Cart/Cart';
 import Contact from './containers/Contact/Contact';
 import Details from './containers/Details/Details';
-import Orders from './containers/Orders/Orders';
 import ProductList from './containers/ProductList/ProductList';
 import Wishlist from './containers/Wishlist/Wishlist';
 import HomePage from './containers/HomePage/HomePage';
 import Logout from './containers/Auth/Logout/Logout';
+
+const asyncOrders = asyncComponent(() => {
+  return import('./containers/Orders/Orders');
+});
+
+const asyncAuth = asyncComponent(() => {
+  return import('./containers/Auth/Auth');
+});
 
 class App extends Component {
   componentDidMount() {
@@ -25,8 +34,8 @@ class App extends Component {
       <Fragment>
         <Layout>
           <Switch>
-            {!this.props.isAuth && <Route path="/auth" component={Auth} />}
-            {this.props.isAuth && <Route path="/orders" component={Orders} />}
+            {!this.props.isAuth && <Route path="/auth" component={asyncAuth} />}
+            {this.props.isAuth && <Route path="/orders" component={asyncOrders} />}
             {this.props.isAuth && <Route path="/logout" component={Logout} />}
             <Route path="/cart" component={Cart} />
             <Route path="/contact" component={Contact} />

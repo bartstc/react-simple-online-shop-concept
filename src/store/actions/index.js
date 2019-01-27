@@ -17,8 +17,7 @@ export {
 export {
   openModal,
   closeModal,
-  toggleSideDrawer,
-  handleLinkClick
+  toggleSideDrawer
 } from './interfaceActions';
 
 export {

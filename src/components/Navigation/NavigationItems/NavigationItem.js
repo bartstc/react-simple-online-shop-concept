@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../../../store/actions';
 
 import { NavLink } from 'react-router-dom';
 
@@ -9,8 +7,7 @@ class NavigationItem extends Component {
     return (
       <li
         style={{ alignSelf: 'flex-start' }}
-        className="nav-link-wrapper"
-        onClick={this.props.handleLinkClick}>
+        className="nav-link-wrapper">
         <NavLink
           onClick={this.props.clicked}
           style={this.props.style}
@@ -22,13 +19,6 @@ class NavigationItem extends Component {
       </li>
     )
   }
-
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    handleLinkClick: () => dispatch(actions.handleLinkClick())
-  }
-}
-
-export default connect(null, mapDispatchToProps)(NavigationItem);
+export default NavigationItem;

@@ -19,7 +19,7 @@ const sideDrawer = (props) => {
   return (
     <Fragment>
       <Backdrop show={props.showSideDrawer} clicked={props.closeSideDrawer} />
-      <div className={attachedClasses.join(' ')}>
+      <div onClick={props.closeSideDrawer} className={attachedClasses.join(' ')}>
         <div className="logo-wrapper">
           <img className="logo" src={logo} alt="Elegant Store" />
           <button onClick={props.closeSideDrawer} className="toggle-side-drawer">
@@ -51,13 +51,13 @@ const mapStateToProps = state => {
   return {
     showSideDrawer: state.interface.sideDrawerShowed,
     isAuth: state.auth.token !== null
-  }
-}
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     closeSideDrawer: () => dispatch(actions.toggleSideDrawer())
-  }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(sideDrawer);

@@ -29,13 +29,6 @@ const toggleSidedrawer = (state, action) => {
   };
 };
 
-const handleLinkClick = (state, action) => {
-  return {
-    ...state,
-    sideDrawerShowed: false
-  };
-};
-
 const getItem = id => productList.find(item => item.id === id);
 
 const interfaceReducer = (state = initialState, action) => {
@@ -48,9 +41,6 @@ const interfaceReducer = (state = initialState, action) => {
 
     case (actionTypes.TOGGLE_SIDEDRAWER):
       return toggleSidedrawer(state, action);
-
-    case (actionTypes.LINK_CLICKED):
-      return handleLinkClick(state, action);
 
     default:
       return state;

@@ -1,47 +1,10 @@
-// import React from 'react';
-// import './ContactForm.scss';
-
-// const contactForm = () => (
-//   <form className="contact-form">
-//     <h3 className="title">Enter Your Contact Data</h3>
-//     <div className="input-wrapper">
-//       <label className="label" htmlFor=""></label>
-//       <input className="input" type="text" placeholder="Placeholder ..." />
-//     </div>
-//     <div className="input-wrapper">
-//       <label className="label" htmlFor=""></label>
-//       <input className="input" type="text" placeholder="Placeholder ..." />
-//     </div>
-//     <div className="input-wrapper">
-//       <label className="label" htmlFor=""></label>
-//       <input className="input" type="text" placeholder="Placeholder ..." />
-//     </div>
-//     <div className="input-wrapper">
-//       <label className="label" htmlFor=""></label>
-//       <input className="input" type="text" placeholder="Placeholder ..." />
-//     </div>
-//     <div className="input-wrapper">
-//       <label className="label" htmlFor=""></label>
-//       <input className="input" type="text" placeholder="Placeholder ..." />
-//     </div>
-//     <div className="input-wrapper">
-//       <label className="label" htmlFor=""></label>
-//       <select className="select-input">
-//         <option value="fastest">Fastest</option>
-//         <option value="price - low to high">Cheapest</option>
-//       </select>
-//     </div>
-//   </form>
-// );
-
-// export default contactForm;
-
 import React, { Component } from 'react';
 import './ContactForm.scss';
 import axios from '../../../axios';
 import { connect } from 'react-redux';
 import ErrorHandler from '../../../hoc/ErrorHandler';
 import * as actions from '../../../store/actions';
+import { checkValidity } from '../../../shared/Validity';
 
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
@@ -112,7 +75,8 @@ class ContactForm extends Component {
         },
         value: '',
         validation: {
-          required: true
+          required: true,
+          isEmail: true
         },
         valid: false,
         touched: false
@@ -153,35 +117,6 @@ class ContactForm extends Component {
     this.props.purchaseOrder(order, this.props.token);
   };
 
-  // ====== Validation function ======
-  checkValidity(value, rules) {
-    let isValid = true;
-
-    if (rules.required) {
-      isValid = value.trim() !== '' && isValid; // trim() -> pominięcie spacji
-    };
-
-    if (rules.minLength) {
-      isValid = value.length >= rules.minLength && isValid;
-    };
-
-    if (rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid;
-    };
-
-    if (rules.isEmail) {
-      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      isValid = pattern.test(value) && isValid
-    };
-
-    if (rules.isNumeric) {
-      const pattern = /^\d+$/;
-      isValid = pattern.test(value) && isValid
-    };
-
-    return isValid;
-  };
-
   // ====== Immutably changind input values ======
   inputChangedHandler = (e, inputIndentifier) => {
     // clone of orderForm
@@ -197,7 +132,7 @@ class ContactForm extends Component {
     updatedFormElement.value = e.target.value;
 
     // VALIDATION
-    updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+    updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
     updatedFormElement.touched = true;
 
     let formIsValid = true;
