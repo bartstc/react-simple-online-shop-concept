@@ -104,7 +104,7 @@ class Details extends Component {
                 clicked={() => addToWishlist(detailProduct.id)}
                 disabled={detailProduct.inWishlist ? true : false}>
                 {detailProduct.inWishlist ?
-                  (<p>In WIshlist</p>) :
+                  (<p>In Wishlist</p>) :
                   (<p>Add to Wishlist</p>)
                 }
               </Button>
