@@ -52,7 +52,7 @@ const input = (props) => {
 
   return (
     <div className="input-wrapper">
-      <label className="label">{props.label}</label>
+      <label className="label">{label}</label>
       {inputElement}
     </div>
   );

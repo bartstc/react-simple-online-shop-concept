@@ -6,8 +6,6 @@ import asyncComponent from './hoc/asyncComponent';
 
 // COMPONENTS
 import Layout from './layout/Layout';
-// import Auth from './containers/Auth/Auth';
-// import Orders from './containers/Orders/Orders';
 import Cart from './containers/Cart/Cart';
 import Contact from './containers/Contact/Contact';
 import Details from './containers/Details/Details';
@@ -30,13 +28,15 @@ class App extends Component {
   };
 
   render() {
+    const { isAuth } = this.props;
+
     return (
       <Fragment>
         <Layout>
           <Switch>
-            {!this.props.isAuth && <Route path="/auth" component={asyncAuth} />}
-            {this.props.isAuth && <Route path="/orders" component={asyncOrders} />}
-            {this.props.isAuth && <Route path="/logout" component={Logout} />}
+            {!isAuth && <Route path="/auth" component={asyncAuth} />}
+            {isAuth && <Route path="/orders" component={asyncOrders} />}
+            {isAuth && <Route path="/logout" component={Logout} />}
             <Route path="/cart" component={Cart} />
             <Route path="/contact" component={Contact} />
             <Route path="/details/:id" component={Details} />

@@ -4,7 +4,7 @@
   background: #fff;
   width: 100%;
   border: 1px solid #000;
-  padding: 7px;
+  padding: 5px 7px;
   margin-top: 5px;
   outline: none;
   cursor: pointer;
@@ -17,7 +17,7 @@
   }
 
   &.small {
-    padding: 3px;
+    padding: 2.5px;
 
     @include mediaMd {
       padding: 7px;

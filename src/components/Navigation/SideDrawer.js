@@ -19,14 +19,14 @@ const sideDrawer = (props) => {
   return (
     <Fragment>
       <Backdrop show={props.showSideDrawer} clicked={props.closeSideDrawer} />
-      <div onClick={props.closeSideDrawer} className={attachedClasses.join(' ')}>
+      <div className={attachedClasses.join(' ')}>
         <div className="logo-wrapper">
           <img className="logo" src={logo} alt="Elegant Store" />
           <button onClick={props.closeSideDrawer} className="toggle-side-drawer">
             <img src={closeBtnIcon} alt="close side drawer" />
           </button>
         </div>
-        <div className="side-navigation-wrapper">
+        <div onClick={props.closeSideDrawer} className="side-navigation-wrapper">
           <SideNavigation>
             <NavigationItem
               linkType={'main'}

@@ -32,7 +32,7 @@ class Cart extends Component {
   };
 
   render() {
-    const { cartItems } = this.props;
+    const { cartItems, clearCart, isAuth, purchased } = this.props;
 
     let selected = <p className="main-info">You select <span className="bold">{cartItems.length}</span> products.</p>
     if (cartItems.length === 1) selected = <p className="main-info">You select <span className="bold">1</span> product.</p>;
@@ -42,7 +42,7 @@ class Cart extends Component {
         <h2 className="main-title">Shopping Cart</h2>
         {selected}
         {cartItems.length > 0 &&
-          <Button clicked={this.props.clearCart} btnType="dark">Clear Cart</Button>
+          <Button clicked={clearCart} btnType="dark">Clear Cart</Button>
         }
         <div className="content-wrapper">
           <ul className="cart-list">
@@ -73,11 +73,11 @@ class Cart extends Component {
             })}
           </ul>
           <div className="checkout">
-            {cartItems.length > 0 && <OrderSummary cartItems={cartItems} acceptOrder={this.acceptOrder} isAuth={this.props.isAuth} />}
+            {cartItems.length > 0 && <OrderSummary cartItems={cartItems} acceptOrder={this.acceptOrder} isAuth={isAuth} />}
             {cartItems.length > 0 && this.state.orderSummaryAccepted && <ContactForm />}
           </div>
         </div>
-        {this.props.purchased && <Redirect to="/" />}
+        {purchased && <Redirect to="/" />}
       </div>
     );
   }
@@ -88,7 +88,7 @@ const mapStateToProps = state => {
     cartItems: state.products.cart,
     purchased: state.order.purchased,
     isAuth: state.auth.token !== null
-  }
+  };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -97,7 +97,7 @@ const mapDispatchToProps = dispatch => {
     handleProductAmount: (id, value) => dispatch(actions.handleProductAmount(id, value)),
     calculateOrder: () => dispatch(actions.calculateOrder()),
     clearCart: () => dispatch(actions.clearCart())
-  }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

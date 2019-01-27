@@ -79,7 +79,7 @@ class Auth extends Component {
   render() {
     // convert object of objects into array of objects
     const formElementsArray = [];
-    for (let key in this.state.controls) { // keys are name, street, ...
+    for (let key in this.state.controls) {
       formElementsArray.push({
         id: key,
         config: this.state.controls[key]

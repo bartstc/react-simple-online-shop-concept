@@ -18,7 +18,60 @@ const femaleCategories = [
   {
     category: 'women-jackets',
     content: 'Jackets',
-  }
+  },
+  {
+    category: 'women-suits',
+    content: 'Suits',
+  },
+  {
+    category: 'women-shirts',
+    content: 'Shirts',
+  },
+  {
+    category: 'women-t-shirts',
+    content: 'T-shirts',
+  },
+  {
+    category: 'women-shoes',
+    content: 'Shoes',
+  },
+  {
+    category: 'women-hats',
+    content: 'Hats',
+  },
+  {
+    category: 'male',
+    content: 'Men',
+    linkType: 'main'
+  },
+  {
+    category: 'men-coats',
+    content: 'Coats',
+  },
+  {
+    category: 'men-jackets',
+    content: 'Jackets',
+  },
+  {
+    category: 'men-suits',
+    content: 'Suits',
+  },
+  {
+    category: 'men-shirts',
+    content: 'Shirts',
+  },
+  {
+    category: 'men-t-shirts',
+    content: 'T-shirts',
+  },
+  {
+    category: 'men-shoes',
+    content: 'Shoes',
+  },
+  {
+    category: 'men-hats',
+    content: 'Hats',
+  },
 ];
 
 const sideNavigation = (props) => (
@@ -44,7 +97,7 @@ const sideNavigation = (props) => (
         )
       })}
 
-      <NavigationItem link="/productlist/women" exact>Suits</NavigationItem>
+      {/* <NavigationItem link="/productlist/women" exact>Suits</NavigationItem>
       <NavigationItem link="/productlist/women" exact>Shirts</NavigationItem>
       <NavigationItem link="/productlist/women" exact>T-shirt</NavigationItem>
       <NavigationItem link="/productlist/women" exact>Shoes</NavigationItem>
@@ -61,7 +114,7 @@ const sideNavigation = (props) => (
       <NavigationItem link="/productlist/women" exact>Shirts</NavigationItem>
       <NavigationItem link="/productlist/women" exact>T-shirt</NavigationItem>
       <NavigationItem link="/productlist/women" exact>Shoes</NavigationItem>
-      <NavigationItem link="/productlist/women" exact>Hats</NavigationItem>
+      <NavigationItem link="/productlist/women" exact>Hats</NavigationItem> */}
 
       {props.children}
     </ul>
