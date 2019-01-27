@@ -16,8 +16,15 @@ const navigationItems = props => (
       exact>Men</NavigationItem>
     <NavigationItem link="/contact" exact>Contact</NavigationItem>
     <NavigationItem link="/" exact>Home</NavigationItem>
+    {props.isAuth ? <NavigationItem link="/orders" exact>Orders</NavigationItem> : null}
   </ul>
 );
+
+const mapStateToProps = state => {
+  return {
+    isAuth: state.auth.token !== null
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -25,4 +32,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(navigationItems);
+export default connect(mapStateToProps, mapDispatchToProps)(navigationItems);

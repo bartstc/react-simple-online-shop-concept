@@ -11,13 +11,15 @@ import thunk from 'redux-thunk';
 import productReducer from './store/reducers/productReducer';
 import interfaceReducer from './store/reducers/interfaceReducer';
 import orderReducer from './store/reducers/orderReducer';
+import authReducer from './store/reducers/authReducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   products: productReducer,
   interface: interfaceReducer,
-  order: orderReducer
+  order: orderReducer,
+  auth: authReducer
 });
 
 const store = createStore(

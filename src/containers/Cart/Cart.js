@@ -22,9 +22,13 @@ class Cart extends Component {
   };
 
   acceptOrder = () => {
-    this.setState({
-      orderSummaryAccepted: true
-    })
+    if (this.props.isAuth) {
+      this.setState({
+        orderSummaryAccepted: true
+      });
+    } else {
+      this.props.history.push('/auth');
+    };
   };
 
   render() {
@@ -37,6 +41,9 @@ class Cart extends Component {
       <div className="cart-container">
         <h2 className="main-title">Shopping Cart</h2>
         {selected}
+        {cartItems.length > 0 &&
+          <Button clicked={this.props.clearCart} btnType="dark">Clear Cart</Button>
+        }
         <div className="content-wrapper">
           <ul className="cart-list">
             {cartItems.map(item => {
@@ -66,14 +73,10 @@ class Cart extends Component {
             })}
           </ul>
           <div className="checkout">
-            {cartItems.length > 0 && <OrderSummary cartItems={cartItems} acceptOrder={this.acceptOrder} />}
-            {this.state.orderSummaryAccepted && <ContactForm />}
+            {cartItems.length > 0 && <OrderSummary cartItems={cartItems} acceptOrder={this.acceptOrder} isAuth={this.props.isAuth} />}
+            {cartItems.length > 0 && this.state.orderSummaryAccepted && <ContactForm />}
           </div>
         </div>
-        {cartItems.length > 0 &&
-          <Button clicked={this.props.clearCart} btnType="dark">Clear Cart</Button>
-        }
-
         {this.props.purchased && <Redirect to="/" />}
       </div>
     );
@@ -83,7 +86,8 @@ class Cart extends Component {
 const mapStateToProps = state => {
   return {
     cartItems: state.products.cart,
-    purchased: state.order.purchased
+    purchased: state.order.purchased,
+    isAuth: state.auth.token !== null
   }
 };
 
@@ -91,7 +95,8 @@ const mapDispatchToProps = dispatch => {
   return {
     remove: id => dispatch(actions.removeCartItem(id)),
     handleProductAmount: (id, value) => dispatch(actions.handleProductAmount(id, value)),
-    calculateOrder: () => dispatch(actions.calculateOrder())
+    calculateOrder: () => dispatch(actions.calculateOrder()),
+    clearCart: () => dispatch(actions.clearCart())
   }
 };
 

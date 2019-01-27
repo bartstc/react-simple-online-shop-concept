@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from './store/actions';
 
 // COMPONENTS
 import Layout from './layout/Layout';
@@ -11,28 +13,45 @@ import Orders from './containers/Orders/Orders';
 import ProductList from './containers/ProductList/ProductList';
 import Wishlist from './containers/Wishlist/Wishlist';
 import HomePage from './containers/HomePage/HomePage';
+import Logout from './containers/Auth/Logout/Logout';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.onTryAutoSignup();
+  };
+
   render() {
     return (
       <Fragment>
         <Layout>
           <Switch>
-            <Route path="/auth" component={Auth} />
+            {!this.props.isAuth && <Route path="/auth" component={Auth} />}
+            {this.props.isAuth && <Route path="/orders" component={Orders} />}
+            {this.props.isAuth && <Route path="/logout" component={Logout} />}
             <Route path="/cart" component={Cart} />
             <Route path="/contact" component={Contact} />
             <Route path="/details/:id" component={Details} />
-            <Route path="/orders" component={Orders} />
             <Route path="/productlist/:type" component={ProductList} />
             <Route path="/wishlist" component={Wishlist} />
-            <Route path="/wishlist" component={Wishlist} />
             <Route path="/" exact component={HomePage} />
-            {/* add default component (page not found) */}
+            <Redirect to="/" />
           </Switch>
         </Layout>
       </Fragment>
     );
   }
-}
+};
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    isAuth: state.auth.token !== null
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onTryAutoSignup: () => dispatch(actions.authCheckState())
+  };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

@@ -36,6 +36,10 @@ const sideDrawer = (props) => {
               linkType={'main'}
               link="/"
               exact>Home</NavigationItem>
+            {props.isAuth ? <NavigationItem
+              linkType={'main'}
+              link="/orders"
+              exact>Orders</NavigationItem> : null}
           </SideNavigation>
         </div>
       </div>
@@ -45,7 +49,8 @@ const sideDrawer = (props) => {
 
 const mapStateToProps = state => {
   return {
-    showSideDrawer: state.interface.sideDrawerShowed
+    showSideDrawer: state.interface.sideDrawerShowed,
+    isAuth: state.auth.token !== null
   }
 }
 

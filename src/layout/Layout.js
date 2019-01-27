@@ -18,6 +18,6 @@ class Layout extends Component {
       </Fragment>
     );
   }
-}
+};
 
 export default Layout;

@@ -144,12 +144,13 @@ class ContactForm extends Component {
     const order = {
       products: this.props.cartItems,
       price: this.props.price,
-      orderData: formData
+      orderData: formData,
+      userId: this.props.userId
     };
 
     console.log(order);
 
-    this.props.purchaseOrder(order);
+    this.props.purchaseOrder(order, this.props.token);
   };
 
   // ====== Validation function ======
@@ -168,7 +169,15 @@ class ContactForm extends Component {
       isValid = value.length <= rules.maxLength && isValid;
     };
 
-    // validation of numbers in Zipcode input
+    if (rules.isEmail) {
+      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      isValid = pattern.test(value) && isValid
+    };
+
+    if (rules.isNumeric) {
+      const pattern = /^\d+$/;
+      isValid = pattern.test(value) && isValid
+    };
 
     return isValid;
   };
@@ -250,13 +259,15 @@ const mapStateToProps = state => {
   return {
     cartItems: state.products.cart,
     price: state.products.orderTotal,
-    loading: state.order.loading
+    loading: state.order.loading,
+    token: state.auth.token,
+    userId: state.auth.userId
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    purchaseOrder: (orderData) => dispatch(actions.purchaseOrder(orderData))
+    purchaseOrder: (orderData, token) => dispatch(actions.purchaseOrder(orderData, token))
   };
 };
 

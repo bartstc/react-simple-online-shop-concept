@@ -24,7 +24,7 @@ class OrderSummary extends Component {
           <p className="subtitle">Order total:</p>
           <p className="value">{orderTotal}.00 $</p>
         </div>
-        <Button clicked={acceptOrder} btnType="dark">To Payment</Button>
+        <Button clicked={acceptOrder} btnType="dark">{this.props.isAuth ? 'To Payment' : 'Sign Up to Order'}</Button>
       </div>
     )
   }

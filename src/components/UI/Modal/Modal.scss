@@ -19,12 +19,13 @@
   overflow-x: hidden;
 
   &.small {
-    width: 270px;
+    width: 290px;
     height: 120px;
     top: 40%;
-    padding: 10px;
+    padding: 20px;
     overflow: hidden;
     display: flex;
+    text-align: center;
     flex-direction: column;
     align-items: center;
     justify-content: center;
