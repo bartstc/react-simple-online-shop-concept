@@ -14,7 +14,7 @@ import Button from '../../components/UI/Button/Button';
 
 class ProductList extends Component {
   state = {
-    checkboxValue: 'relevance'
+    checkboxValue: 'relevance',
   };
 
   handleChange = (e) => {

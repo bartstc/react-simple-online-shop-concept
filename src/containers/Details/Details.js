@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
 import { Redirect } from 'react-router-dom';
 
-import DetailItem from '../../components/Detail/DetailItem';
+import DetailItem from './DetailItem/DetailItem';
 import Button from '../../components/UI/Button/Button';
 import Modal from '../../components/UI/Modal/Modal';
 
