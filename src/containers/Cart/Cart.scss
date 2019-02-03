@@ -16,6 +16,7 @@
   max-width: 360px;
   margin: 0 auto;
   margin-top: 1em;
+  list-style: none;
 
   @include mediaMd {
     max-width: 500px;
@@ -89,3 +90,4 @@
     }
   }
 }
+

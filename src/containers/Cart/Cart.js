@@ -3,6 +3,8 @@ import './Cart.scss';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
 import { Redirect } from 'react-router-dom';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
+import CSSTransition from 'react-transition-group/CSSTransition';
 
 import Button from '../../components/UI/Button/Button';
 import OrderSummary from './OrderSummary/OrderSummary';
@@ -37,23 +39,19 @@ class Cart extends Component {
     let selected = <p className="main-info">You select <span className="bold">{cartItems.length}</span> products.</p>
     if (cartItems.length === 1) selected = <p className="main-info">You select <span className="bold">1</span> product.</p>;
 
-    return (
-      <div className="cart-container">
-        <h2 className="main-title">Shopping Cart</h2>
-        {selected}
-        {cartItems.length > 0 &&
-          <Button clicked={clearCart} btnType="dark">Clear Cart</Button>
-        }
-        <div className="content-wrapper">
-          <ul className="cart-list">
-            {cartItems.map(item => {
-              const { id, img, title, size, price, total, amount } = item;
-              const { remove, handleProductAmount } = this.props;
+    let list;
+    (cartItems.length === 0) ? list = <p className="main-info" style={{ marginTop: '20px', fontWeight: '500' }}>You do not have any products on the list yet.</p> :
+      list = (
+        <TransitionGroup component="ul" className="cart-list">
+          {cartItems.map(item => {
+            const { id, img, title, size, price, total, amount } = item;
+            const { remove, handleProductAmount } = this.props;
 
-              return (
-                <li key={id} className="cart-item">
+            return (
+              <CSSTransition key={id} classNames="fade" timeout={300}>
+                <li className="cart-item">
                   <div className="img-wrapper">
-                    <img className="cart-item-img" src={img} alt="" />
+                    <img className="cart-item-img" src={img} alt="product img" />
                   </div>
                   <div className="cart-item-content">
                     <h3 className="name">{title}</h3>
@@ -69,9 +67,21 @@ class Cart extends Component {
                     <Button clicked={() => remove(id)} btnType="small">Remove</Button>
                   </div>
                 </li>
-              )
-            })}
-          </ul>
+              </CSSTransition>
+            )
+          })}
+        </TransitionGroup>
+      );
+
+    return (
+      <div className="cart-container">
+        <h2 className="main-title">Shopping Cart</h2>
+        {selected}
+        {cartItems.length > 0 &&
+          <Button clicked={clearCart} btnType="dark">Clear Cart</Button>
+        }
+        <div className="content-wrapper">
+          {list}
           <div className="checkout">
             {cartItems.length > 0 && <OrderSummary cartItems={cartItems} acceptOrder={this.acceptOrder} isAuth={isAuth} />}
             {cartItems.length > 0 && this.state.orderSummaryAccepted && <ContactForm />}
