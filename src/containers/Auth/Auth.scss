@@ -14,3 +14,15 @@
   flex-direction: column;
   align-items: center;
 }
+
+.auth-title {
+  font-weight: $fw-semibold;
+  font-size: 1em;
+  text-transform: uppercase;
+  margin-bottom: 1.4em;
+  text-align: center;
+
+  @include mediaSm {
+    font-size: 1.2em;
+  }
+}

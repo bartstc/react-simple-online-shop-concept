@@ -64,21 +64,3 @@ class Product extends Component {
 };
 
 export default Product;
-
-// return (
-//   <div className="product">
-//     <div className="img-wrapper">
-//       <img onClick={() => props.showModal(id)} className="product-img" src={img} alt={title} />
-//     </div>
-//     <p className="info">{title}</p>
-//     <p className="info">Price: {price}.00 $</p>
-//     <div className="btn-wrapper">
-//       <Link to={`/details/${id}`}>
-//         <Button
-//           clicked={() => props.showDetails(id)}
-//           btnType="mobile">Show Details
-//       </Button>
-//       </Link>
-//     </div>
-//   </div>
-// );

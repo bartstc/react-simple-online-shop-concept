@@ -77,12 +77,15 @@ class Auth extends Component {
   };
 
   render() {
+    const { loading, error, isAuth } = this.props;
+    const { controls, isSignup } = this.state;
+
     // convert object of objects into array of objects
     const formElementsArray = [];
-    for (let key in this.state.controls) {
+    for (let key in controls) {
       formElementsArray.push({
         id: key,
-        config: this.state.controls[key]
+        config: controls[key]
       });
     };
 
@@ -100,30 +103,34 @@ class Auth extends Component {
     ));
 
     // Display Spinner
-    if (this.props.loading) {
+    if (loading) {
       form = <Spinner />
     };
 
     // Display Firebase Error Message
     let errorMessage = null;
-    if (this.props.error) {
+    if (error) {
       errorMessage = (
-        <p>{this.props.error.message}</p>
+        <p>{error.message}</p>
       )
     };
 
     // redirect after signin/login
     let authRedirect = null;
-    if (this.props.isAuth) {
+    if (isAuth) {
       authRedirect = <Redirect to="/" />
     };
 
+    let title = <h1 className="auth-title">You don't have an account yet? Create them below.</h1>
+    if (!isSignup) title = <h1 className="auth-title">Do you already have an account? Log in below.</h1>;
+
     return (
       <div className="auth-container">
+        {title}
         <div className="switch">
           <Button
             clicked={this.switchAuthModeHandler}
-            btnType="dark">SWITCH TO {this.state.isSignup ? 'SINGIN' : 'SIGNUP'}</Button>
+            btnType="dark">SWITCH TO {isSignup ? 'SINGIN' : 'SIGNUP'}</Button>
         </div>
         {authRedirect}
         {errorMessage}
