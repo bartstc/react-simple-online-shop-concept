@@ -9,9 +9,6 @@ import Product from './Product/Product';
 import Modal from '../../components/UI/Modal/Modal';
 import Button from '../../components/UI/Button/Button';
 
-// TO ADD:
-// animation on product
-
 class ProductList extends Component {
   state = {
     checkboxValue: 'relevance',
