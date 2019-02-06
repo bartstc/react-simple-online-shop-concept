@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import './HomePage.scss';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
+import PropTypes from 'prop-types';
 
 import Modal from '../../components/UI/Modal/Modal';
 import Button from '../../components/UI/Button/Button';
@@ -56,18 +57,23 @@ class HomePage extends Component {
   }
 };
 
+HomePage.propTypes = {
+  purchased: PropTypes.bool.isRequired,
+  purchaseInit: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired
+};
+
 const mapStateToProps = state => {
   return {
-    cartItems: state.products.cart,
-    purchased: state.order.purchased,
-  }
+    purchased: state.order.purchased
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     purchaseInit: () => dispatch(actions.purchaseInit()),
     closeModal: () => dispatch(actions.closeModal())
-  }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

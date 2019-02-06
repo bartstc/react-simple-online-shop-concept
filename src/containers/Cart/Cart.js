@@ -5,6 +5,7 @@ import * as actions from '../../store/actions';
 import { Redirect } from 'react-router-dom';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import CSSTransition from 'react-transition-group/CSSTransition';
+import PropTypes from 'prop-types';
 
 import Button from '../../components/UI/Button/Button';
 import OrderSummary from './OrderSummary/OrderSummary';
@@ -91,6 +92,16 @@ class Cart extends Component {
       </div>
     );
   }
+};
+
+Cart.propTypes = {
+  cartItems: PropTypes.array.isRequired,
+  purchased: PropTypes.bool.isRequired,
+  isAuth: PropTypes.bool.isRequired,
+  remove: PropTypes.func.isRequired,
+  handleProductAmount: PropTypes.func.isRequired,
+  calculateOrder: PropTypes.func.isRequired,
+  clearCart: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {

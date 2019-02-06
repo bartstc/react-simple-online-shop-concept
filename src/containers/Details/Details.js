@@ -3,6 +3,7 @@ import './Details.scss';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import DetailItem from './DetailItem/DetailItem';
 import Button from '../../components/UI/Button/Button';
@@ -114,6 +115,15 @@ class Details extends Component {
       </Fragment>
     )
   }
+};
+
+Details.propTypes = {
+  modalShowed: PropTypes.bool.isRequired,
+  detailProduct: PropTypes.object,
+  openModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  addToCart: PropTypes.func.isRequired,
+  addToWishlist: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {

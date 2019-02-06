@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import CSSTransition from 'react-transition-group/CSSTransition';
+import PropTypes from 'prop-types';
 
 import WishlistItem from './WishlistItem/WishlistItem';
 import Button from '../../components/UI/Button/Button';
@@ -33,16 +34,21 @@ const wishlist = (props) => {
   )
 };
 
+wishlist.propTypes = {
+  wishlistItems: PropTypes.array.isRequired,
+  clearWishlist: PropTypes.func.isRequired
+};
+
 const mapStateToProps = state => {
   return {
     wishlistItems: state.products.wishlist
-  }
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     clearWishlist: () => dispatch(actions.clearWishlist())
-  }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(wishlist);

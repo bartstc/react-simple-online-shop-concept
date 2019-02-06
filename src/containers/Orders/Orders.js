@@ -4,6 +4,7 @@ import axios from '../../axios';
 import ErrorHandler from '../../hoc/ErrorHandler';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
+import PropTypes from 'prop-types';
 
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Order from './Order/Order';
@@ -33,6 +34,14 @@ class Orders extends Component {
       </div>
     );
   }
+};
+
+Orders.propTypes = {
+  orders: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  token: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
+  fetchOrders: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {

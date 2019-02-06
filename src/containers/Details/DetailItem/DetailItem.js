@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './DetailItem.scss';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class DetailItem extends Component {
   render() {
@@ -27,6 +28,10 @@ class DetailItem extends Component {
       </li>
     )
   }
+};
+
+DetailItem.propTypes = {
+  detailProduct: PropTypes.object
 };
 
 const mapStateToProps = state => {

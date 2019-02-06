@@ -37,7 +37,6 @@ export const purchaseOrder = (orderData, token) => {
 
     axios.post('/orders.json?auth=' + token, orderData)
       .then(res => {
-        console.log(res.data);
         dispatch(purchaseOrderSuccess(res.data.name, orderData));
         dispatch(actions.clearCart());
       })
@@ -77,7 +76,6 @@ export const fetchOrders = (token, userId) => {
 
     axios.get('/orders.json' + queryParams)
       .then(res => {
-        console.log(res.data);
         const fetchedOrders = [];
         for (let key in res.data) {
           fetchedOrders.push({

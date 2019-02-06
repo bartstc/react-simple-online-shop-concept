@@ -3,6 +3,7 @@ import './ProductList.scss';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
+import PropTypes from 'prop-types';
 
 import SideNavigation from '../../components/Navigation/NavigationItems/SideNavigation';
 import Product from './Product/Product';
@@ -82,6 +83,19 @@ class ProductList extends Component {
   };
 };
 
+ProductList.propTypes = {
+  products: PropTypes.array.isRequired,
+  modalShowed: PropTypes.bool.isRequired,
+  modalProduct: PropTypes.object,
+  checkboxValue: PropTypes.string.isRequired,
+  openModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  sortProducts: PropTypes.func.isRequired,
+  handleDirection: PropTypes.func.isRequired,
+  handleCheckboxValue: PropTypes.func.isRequired,
+  showDetails: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = state => {
   return {
     products: state.products.products,
@@ -99,7 +113,7 @@ const mapDispatchToProps = dispatch => {
     handleDirection: () => dispatch(actions.handleDirection()),
     handleCheckboxValue: value => dispatch(actions.handleCheckboxValue(value)),
     showDetails: id => dispatch(actions.showDetails(id))
-  }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductList);

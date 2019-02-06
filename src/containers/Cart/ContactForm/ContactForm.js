@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import ErrorHandler from '../../../hoc/ErrorHandler';
 import * as actions from '../../../store/actions';
 import { checkValidity } from '../../../shared/Validity';
+import PropTypes from 'prop-types';
 
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
@@ -112,8 +113,6 @@ class ContactForm extends Component {
       userId: this.props.userId
     };
 
-    console.log(order);
-
     this.props.purchaseOrder(order, this.props.token);
   };
 
@@ -188,6 +187,15 @@ class ContactForm extends Component {
 
     return form;
   }
+};
+
+ContactForm.propTypes = {
+  cartItems: PropTypes.array.isRequired,
+  price: PropTypes.number.isRequired,
+  loading: PropTypes.bool.isRequired,
+  token: PropTypes.string,
+  userId: PropTypes.string,
+  purchaseOrder: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {

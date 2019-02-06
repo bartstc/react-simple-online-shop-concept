@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import './Navigation.scss';
 import * as actions from '../../store/actions';
+import PropTypes from 'prop-types';
 
 import logo from '../../assets/icons/logo.png';
 import closeBtnIcon from '../../assets/icons/arrow_left.png';
@@ -45,6 +46,12 @@ const sideDrawer = (props) => {
       </div>
     </Fragment>
   );
+};
+
+sideDrawer.propTypes = {
+  showSideDrawer: PropTypes.bool.isRequired,
+  isAuth: PropTypes.bool.isRequired,
+  closeSideDrawer: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {

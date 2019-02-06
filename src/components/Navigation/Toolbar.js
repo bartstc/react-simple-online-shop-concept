@@ -2,6 +2,7 @@ import React from 'react';
 import './Navigation.scss';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
+import PropTypes from 'prop-types';
 
 import NavigationItems from './NavigationItems/NavigationItems';
 import NavigationItemsIcons from './NavigationItems/NavigationItemsIcons';
@@ -25,6 +26,10 @@ const toolbar = (props) => (
     </nav>
   </header>
 );
+
+toolbar.propTypes = {
+  openSideDrawer: PropTypes.func.isRequired
+};
 
 const mapDispatchToProps = dispatch => {
   return {

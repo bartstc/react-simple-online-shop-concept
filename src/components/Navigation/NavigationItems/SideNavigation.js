@@ -2,6 +2,7 @@ import React from 'react';
 import '../Navigation.scss';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions';
+import PropTypes from 'prop-types';
 
 import NavigationItem from './NavigationItem';
 
@@ -77,12 +78,6 @@ const femaleCategories = [
 const sideNavigation = (props) => (
   <nav className="side-navigation">
     <ul className="side-navigation-list">
-      {/* <NavigationItem
-        clicked={() => props.filterProducts('female')}
-        style={{ lineHeight: '35px', fontSize: '1.2em', fontWeight: '500' }}
-        link="/productlist/female"
-        exact>Women</NavigationItem> */}
-
       {femaleCategories.map(femaleCategory => {
         const { category, linkType, content } = femaleCategory;
 
@@ -96,30 +91,14 @@ const sideNavigation = (props) => (
           </NavigationItem>
         )
       })}
-
-      {/* <NavigationItem link="/productlist/women" exact>Suits</NavigationItem>
-      <NavigationItem link="/productlist/women" exact>Shirts</NavigationItem>
-      <NavigationItem link="/productlist/women" exact>T-shirt</NavigationItem>
-      <NavigationItem link="/productlist/women" exact>Shoes</NavigationItem>
-      <NavigationItem link="/productlist/women" exact>Hats</NavigationItem>
-
-      <NavigationItem
-        style={{ lineHeight: '35px', fontSize: '1.2em', fontWeight: '500' }}
-        link="/productlist/women"
-        exact>Men</NavigationItem>
-
-      <NavigationItem link="/productlist/women" exact>Coats</NavigationItem>
-      <NavigationItem link="/productlist/women" exact>Jackets</NavigationItem>
-      <NavigationItem link="/productlist/women" exact>Suits</NavigationItem>
-      <NavigationItem link="/productlist/women" exact>Shirts</NavigationItem>
-      <NavigationItem link="/productlist/women" exact>T-shirt</NavigationItem>
-      <NavigationItem link="/productlist/women" exact>Shoes</NavigationItem>
-      <NavigationItem link="/productlist/women" exact>Hats</NavigationItem> */}
-
       {props.children}
     </ul>
   </nav>
 );
+
+sideNavigation.propTypes = {
+  filterProducts: PropTypes.func.isRequired
+};
 
 const mapDispatchToProps = dispatch => {
   return {

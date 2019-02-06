@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './OrderSummary.scss';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Button from '../../../components/UI/Button/Button';
 
@@ -30,12 +31,16 @@ class OrderSummary extends Component {
   }
 };
 
+OrderSummary.propTypes = {
+  priceTotal: PropTypes.number.isRequired,
+  delivery: PropTypes.number.isRequired,
+  orderTotal: PropTypes.number.isRequired
+};
+
 const mapStateToProps = state => {
   return {
     priceTotal: state.products.priceTotal,
     delivery: state.products.delivery,
-    promoCode: state.products.promoCode,
-    promoSaving: state.products.promoSaving,
     orderTotal: state.products.orderTotal
   }
 };

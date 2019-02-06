@@ -4,6 +4,7 @@ import * as actions from '../../store/actions';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { checkValidity } from '../../shared/Validity';
+import PropTypes from 'prop-types';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
@@ -141,6 +142,13 @@ class Auth extends Component {
       </div>
     );
   }
+};
+
+Auth.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.object,
+  isAuth: PropTypes.bool.isRequired,
+  onAuth: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {

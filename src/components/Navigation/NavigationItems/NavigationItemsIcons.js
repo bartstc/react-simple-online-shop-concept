@@ -1,6 +1,7 @@
 import React from 'react';
 import NavigationItem from './NavigationItem';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import userIcon from '../../../assets/icons/user.png';
 import heartIcon from '../../../assets/icons/heart_white.png';
@@ -26,6 +27,11 @@ const navigationItemsIcons = props => (
     </NavigationItem>
   </ul>
 );
+
+navigationItemsIcons.propTypes = {
+  cartItems: PropTypes.array,
+  isAuth: PropTypes.bool
+};
 
 const mapStateToProps = state => {
   return {

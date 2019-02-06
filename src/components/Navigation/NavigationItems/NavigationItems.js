@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions';
+import PropTypes from 'prop-types';
 
 import NavigationItem from './NavigationItem';
 
@@ -19,6 +20,11 @@ const navigationItems = props => (
     {props.isAuth ? <NavigationItem link="/orders" exact>Orders</NavigationItem> : null}
   </ul>
 );
+
+NavigationItem.propTypes = {
+  isAuth: PropTypes.bool,
+  filterProducts: PropTypes.func
+};
 
 const mapStateToProps = state => {
   return {
