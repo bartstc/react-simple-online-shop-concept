@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 
 import WishlistItem from './WishlistItem/WishlistItem';
 import Button from '../../components/UI/Button/Button';
+import ScrollToTopOnMount from '../../shared/ScrollToTopOnMount';
 
 const wishlist = (props) => {
   let list;
@@ -23,14 +24,17 @@ const wishlist = (props) => {
     );
 
   return (
-    <div className="wishlist-container">
-      <h2 className="main-title">Wishlist</h2>
-      <p className="main-info">Lorem ipsum dolor adipiscing elit. Donec eleifend ligula neque, at faucibus metus trum sedru.</p>
-      {list}
-      {props.wishlistItems.length > 0 &&
-        <Button clicked={props.clearWishlist} btnType="dark">Clear Wishlist</Button>
-      }
-    </div>
+    <>
+      <ScrollToTopOnMount />
+      <div className="wishlist-container">
+        <h2 className="main-title">Wishlist</h2>
+        <p className="main-info">Lorem ipsum dolor adipiscing elit. Donec eleifend ligula neque, at faucibus metus trum sedru.</p>
+        {list}
+        {props.wishlistItems.length > 0 &&
+          <Button clicked={props.clearWishlist} btnType="dark">Clear Wishlist</Button>
+        }
+      </div>
+    </>
   )
 };
 

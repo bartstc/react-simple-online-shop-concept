@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import ScrollToTopOnMount from '../../shared/ScrollToTopOnMount';
 
 class Auth extends Component {
   state = {
@@ -126,20 +127,23 @@ class Auth extends Component {
     if (!isSignup) title = <h1 className="auth-title">Do you already have an account? Log in below.</h1>;
 
     return (
-      <div className="auth-container">
-        {title}
-        <div className="switch">
-          <Button
-            clicked={this.switchAuthModeHandler}
-            btnType="dark">SWITCH TO {isSignup ? 'SINGIN' : 'SIGNUP'}</Button>
+      <>
+        <ScrollToTopOnMount />
+        <div className="auth-container">
+          {title}
+          <div className="switch">
+            <Button
+              clicked={this.switchAuthModeHandler}
+              btnType="dark">SWITCH TO {isSignup ? 'SINGIN' : 'SIGNUP'}</Button>
+          </div>
+          {authRedirect}
+          {errorMessage}
+          <form onSubmit={this.submitHandler}>
+            {form}
+            <Button>Submit</Button>
+          </form>
         </div>
-        {authRedirect}
-        {errorMessage}
-        <form onSubmit={this.submitHandler}>
-          {form}
-          <Button>Submit</Button>
-        </form>
-      </div>
+      </>
     );
   }
 };

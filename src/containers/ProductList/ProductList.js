@@ -9,6 +9,7 @@ import SideNavigation from '../../components/Navigation/NavigationItems/SideNavi
 import Product from './Product/Product';
 import Modal from '../../components/UI/Modal/Modal';
 import Button from '../../components/UI/Button/Button';
+import ScrollToTopOnMount from '../../shared/ScrollToTopOnMount';
 
 class ProductList extends Component {
   state = {
@@ -36,49 +37,52 @@ class ProductList extends Component {
     const { title, img, subtitle, price, id } = this.props.modalProduct;
 
     return (
-      <div className="product-container">
-        <Modal
-          showModal={modalShowed}
-          showBackdrop={modalShowed}
-          closeModal={closeModal}>
-          <button onClick={closeModal} className="close-modal-btn">x</button>
-          <h3 className="main-title">{title}</h3>
-          <img src={img} alt="" />
-          <h3 className="modal-title">Info:</h3>
-          <p className="modal-subtitle">{subtitle}</p>
-          <h3 className="modal-title">Price: {price}.00 $</h3>
-          <h3 className="modal-title">Sizes: S, M, L, XL, XXL</h3>
-          <div className="btn-wrapper">
-            <Link to={`/details/${id}`}>
-              <Button clicked={() => this.showDetailsByModal(id)}>Show Details</Button>
-            </Link>
-          </div>
-        </Modal>
-        <div className="filter-panel">
-          Sort by:
+      <>
+        <ScrollToTopOnMount />
+        <div className="product-container">
+          <Modal
+            showModal={modalShowed}
+            showBackdrop={modalShowed}
+            closeModal={closeModal}>
+            <button onClick={closeModal} className="close-modal-btn">x</button>
+            <h3 className="main-title">{title}</h3>
+            <img src={img} alt="" />
+            <h3 className="modal-title">Info:</h3>
+            <p className="modal-subtitle">{subtitle}</p>
+            <h3 className="modal-title">Price: {price}.00 $</h3>
+            <h3 className="modal-title">Sizes: S, M, L, XL, XXL</h3>
+            <div className="btn-wrapper">
+              <Link to={`/details/${id}`}>
+                <Button clicked={() => this.showDetailsByModal(id)}>Show Details</Button>
+              </Link>
+            </div>
+          </Modal>
+          <div className="filter-panel">
+            Sort by:
           <select onChange={this.handleChange} value={checkboxValue}>
-            <option value="relevance">Relevance</option>
-            <option value="price - low to high">Price - low to high</option>
-            <option value="price - high to low">Price - high to low</option>
-          </select>
-          <p className="products-amount">Products amount: <span className="amount">{products.length}</span></p>
-        </div>
-        <div className="product-list-wrapper">
-          <div className="navigation">
-            <SideNavigation />
+              <option value="relevance">Relevance</option>
+              <option value="price - low to high">Price - low to high</option>
+              <option value="price - high to low">Price - high to low</option>
+            </select>
+            <p className="products-amount">Products amount: <span className="amount">{products.length}</span></p>
           </div>
-          <ul className="product-list">
-            {products.map(product => (
-              <Product
-                key={product.id}
-                product={product}
-                showModal={openModal}
-                showDetails={showDetails}
-              />
-            ))}
-          </ul>
+          <div className="product-list-wrapper">
+            <div className="navigation">
+              <SideNavigation />
+            </div>
+            <ul className="product-list">
+              {products.map(product => (
+                <Product
+                  key={product.id}
+                  product={product}
+                  showModal={openModal}
+                  showDetails={showDetails}
+                />
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
+      </>
     );
   };
 };

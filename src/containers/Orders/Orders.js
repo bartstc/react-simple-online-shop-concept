@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Order from './Order/Order';
+import ScrollToTopOnMount from '../../shared/ScrollToTopOnMount';
 
 class Orders extends Component {
   componentDidMount() {
@@ -25,13 +26,16 @@ class Orders extends Component {
     };
 
     return (
-      <div className="orders-container">
-        <h2 className="main-title">Your Orders</h2>
-        <p className="main-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eleifend ligula neque, at faucibus metus trum sedru.</p>
-        <ul className="order-list">
-          {orders}
-        </ul>
-      </div>
+      <>
+        <ScrollToTopOnMount />
+        <div className="orders-container">
+          <h2 className="main-title">Your Orders</h2>
+          <p className="main-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eleifend ligula neque, at faucibus metus trum sedru.</p>
+          <ul className="order-list">
+            {orders}
+          </ul>
+        </div>
+      </>
     );
   }
 };

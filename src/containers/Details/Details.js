@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import './Details.scss';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import DetailItem from './DetailItem/DetailItem';
 import Button from '../../components/UI/Button/Button';
 import Modal from '../../components/UI/Modal/Modal';
+import ScrollToTopOnMount from '../../shared/ScrollToTopOnMount';
 
 class Details extends Component {
   state = {
@@ -33,7 +34,8 @@ class Details extends Component {
     if (!detailProduct) return <Redirect to="/" />
 
     return (
-      <Fragment>
+      <>
+        <ScrollToTopOnMount />
         <Modal
           modalType="small"
           showModal={modalShowed}
@@ -112,7 +114,7 @@ class Details extends Component {
             </div>
           </DetailItem>
         </ul>
-      </Fragment>
+      </>
     )
   }
 };

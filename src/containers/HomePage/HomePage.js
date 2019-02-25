@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import './HomePage.scss';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import Modal from '../../components/UI/Modal/Modal';
 import Button from '../../components/UI/Button/Button';
+import ScrollToTopOnMount from '../../shared/ScrollToTopOnMount';
 
 import saleBg from '../../assets/home_page/Sale.jpeg';
 import slideOne from '../../assets/home_page/slide_1.jpeg';
@@ -25,7 +26,8 @@ class HomePage extends Component {
 
   render() {
     return (
-      <Fragment>
+      <>
+        <ScrollToTopOnMount />
         <Modal
           modalType="small"
           showModal={this.props.purchased}
@@ -52,7 +54,7 @@ class HomePage extends Component {
             ))}
           </div>
         </div>
-      </Fragment>
+      </>
     )
   }
 };

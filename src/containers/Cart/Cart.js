@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import Button from '../../components/UI/Button/Button';
 import OrderSummary from './OrderSummary/OrderSummary';
 import ContactForm from './ContactForm/ContactForm';
+import ScrollToTopOnMount from '../../shared/ScrollToTopOnMount';
 
 class Cart extends Component {
   state = {
@@ -75,21 +76,24 @@ class Cart extends Component {
       );
 
     return (
-      <div className="cart-container">
-        <h2 className="main-title">Shopping Cart</h2>
-        {selected}
-        {cartItems.length > 0 &&
-          <Button clicked={clearCart} btnType="dark">Clear Cart</Button>
-        }
-        <div className="content-wrapper">
-          {list}
-          <div className="checkout">
-            {cartItems.length > 0 && <OrderSummary cartItems={cartItems} acceptOrder={this.acceptOrder} isAuth={isAuth} />}
-            {cartItems.length > 0 && this.state.orderSummaryAccepted && <ContactForm />}
+      <>
+        <ScrollToTopOnMount />
+        <div className="cart-container">
+          <h2 className="main-title">Shopping Cart</h2>
+          {selected}
+          {cartItems.length > 0 &&
+            <Button clicked={clearCart} btnType="dark">Clear Cart</Button>
+          }
+          <div className="content-wrapper">
+            {list}
+            <div className="checkout">
+              {cartItems.length > 0 && <OrderSummary cartItems={cartItems} acceptOrder={this.acceptOrder} isAuth={isAuth} />}
+              {cartItems.length > 0 && this.state.orderSummaryAccepted && <ContactForm />}
+            </div>
           </div>
+          {purchased && <Redirect to="/" />}
         </div>
-        {purchased && <Redirect to="/" />}
-      </div>
+      </>
     );
   }
 };
