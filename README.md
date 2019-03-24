@@ -5,8 +5,10 @@ Full stack project with authentication and database fired on firebase. The user 
 
 ## Used technologies
 
-⋅⋅* React & Redux on frontend. 
-⋅⋅* Firebase on backend (storing data and authentication). 
+- React & Redux on frontend. 
+- Firebase on backend (storing data and authentication). 
+
+## Preview
 
 You can see this app in action.
 https://react-elegant-store.firebaseapp.com/
