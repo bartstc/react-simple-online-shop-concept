@@ -7,6 +7,7 @@ Full stack project with authentication and database fired on firebase. The user 
 
 - React & Redux on frontend. 
 - Firebase on backend (storing data and authentication). 
+- Adobe XD and Illustrator - design.
 
 ## Preview
 
