@@ -1,23 +1,23 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../../../store/actions';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { filterProducts } from '../../../store/actions';
 
 import NavigationItem from './NavigationItem';
 
-const navigationItems = props => (
+const navigationItems = ({ filterProducts, isAuth }) => (
   <ul className="nav-list">
     <NavigationItem
-      clicked={() => props.filterProducts('female')}
+      clicked={() => filterProducts('female')}
       link="/productlist/female"
       exact>Women</NavigationItem>
     <NavigationItem
-      clicked={() => props.filterProducts('male')}
+      clicked={() => filterProducts('male')}
       link="/productlist/male"
       exact>Men</NavigationItem>
     <NavigationItem link="/contact" exact>Contact</NavigationItem>
     <NavigationItem link="/" exact>Home</NavigationItem>
-    {props.isAuth ? <NavigationItem link="/orders" exact>Orders</NavigationItem> : null}
+    {isAuth ? <NavigationItem link="/orders" exact>Orders</NavigationItem> : null}
   </ul>
 );
 
@@ -26,16 +26,6 @@ NavigationItem.propTypes = {
   filterProducts: PropTypes.func
 };
 
-const mapStateToProps = state => {
-  return {
-    isAuth: state.auth.token !== null
-  };
-};
+const mapStateToProps = ({ auth }) => ({ isAuth: auth.token !== null });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    filterProducts: (category) => dispatch(actions.filterProducts(category))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(navigationItems);
+export default connect(mapStateToProps, { filterProducts })(navigationItems);

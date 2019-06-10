@@ -1,17 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import NavigationItem from './NavigationItem';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import userIcon from '../../../assets/icons/user.png';
 import heartIcon from '../../../assets/icons/heart_white.png';
 import cartIcon from '../../../assets/icons/cart_white.png';
 import logoutIcon from '../../../assets/icons/logout.png';
 
-const navigationItemsIcons = props => (
+const navigationItemsIcons = ({ cartItems, isAuth }) => (
   <ul className="navigation-icons-list">
-    <p className="products-amount">{props.cartItems.length}</p>
-    {!props.isAuth
+    <p className="products-amount">{cartItems.length}</p>
+    {!isAuth
       ? <NavigationItem link="/auth" exact>
         <img className="icon" src={userIcon} alt="sign in or sign up" />
       </NavigationItem>
@@ -33,11 +33,9 @@ navigationItemsIcons.propTypes = {
   isAuth: PropTypes.bool
 };
 
-const mapStateToProps = state => {
-  return {
-    cartItems: state.products.cart,
-    isAuth: state.auth.token !== null
-  };
-};
+const mapStateToProps = ({ products, auth }) => ({
+  cartItems: products.cart,
+  isAuth: auth.token !== null
+});
 
 export default connect(mapStateToProps)(navigationItemsIcons);

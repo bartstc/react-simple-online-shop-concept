@@ -1,8 +1,8 @@
 import React from 'react';
-import '../Navigation.scss';
-import { connect } from 'react-redux';
-import * as actions from '../../../store/actions';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { filterProducts } from '../../../store/actions';
+import '../Navigation.scss';
 
 import NavigationItem from './NavigationItem';
 
@@ -75,7 +75,7 @@ const femaleCategories = [
   },
 ];
 
-const sideNavigation = (props) => (
+const sideNavigation = ({ filterProducts, children }) => (
   <nav className="side-navigation">
     <ul className="side-navigation-list">
       {femaleCategories.map(femaleCategory => {
@@ -84,14 +84,14 @@ const sideNavigation = (props) => (
         return (
           <NavigationItem
             key={category}
-            clicked={() => props.filterProducts(category)}
+            clicked={() => filterProducts(category)}
             linkType={linkType}
             link={`/productlist/${category}`}>
             {content}
           </NavigationItem>
         )
       })}
-      {props.children}
+      {children}
     </ul>
   </nav>
 );
@@ -100,10 +100,4 @@ sideNavigation.propTypes = {
   filterProducts: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    filterProducts: (category) => dispatch(actions.filterProducts(category))
-  }
-};
-
-export default connect(null, mapDispatchToProps)(sideNavigation);
+export default connect(null, { filterProducts })(sideNavigation);

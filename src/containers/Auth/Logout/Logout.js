@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import * as actions from '../../../store/actions';
+import { logout } from '../../../store/actions';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class Logout extends Component {
   componentDidMount() {
-    this.props.onLogout();
+    this.props.logout();
   };
 
   render() {
@@ -15,13 +15,7 @@ class Logout extends Component {
 };
 
 Logout.propTypes = {
-  onLogout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onLogout: () => dispatch(actions.logout())
-  };
-};
-
-export default connect(null, mapDispatchToProps)(Logout);
+export default connect(null, { logout })(Logout);
